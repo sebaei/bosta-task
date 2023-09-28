@@ -1,8 +1,9 @@
 import React from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import StepProgressBar from "react-step-progress";
 import "react-step-progress/dist/index.css";
+import { setShipment } from "../redux/actions/index.ts";
 
 const baseURL = "https://tracking.bosta.co/shipments/track/7234258";
 
@@ -24,23 +25,28 @@ const step3Content = <h1>Step 3 Content</h1>;
 const step4Content = <h1>STep 4 Content</h1>;
 
 const Status = () => {
-  const [shipment, setShipment] = React.useState(null);
+  const products = useSelector((state) => state.allShipments.shipment);
+  console.log(products);
+
+  const dispatch = useDispatch();
+  const [shipment, setSHipmentData] = React.useState(null);
   React.useEffect(() => {
     axios.get(baseURL).then((response) => {
-      setShipment(response.data);
+      dispatch(setShipment(response.data));
+      setSHipmentData(response.data);
     });
   }, []);
 
-  console.log(shipment);
+  // console.log(shipment);
   const dateString = shipment?.CurrentStatus.timestamp;
   const date = new Date(dateString);
   const timestampWithOffset = date.getTime();
   const offset = date.getTimezoneOffset() * 60 * 1000;
-  console.log(offset);
+  // console.log(offset);
   const timestampWithoutOffset = timestampWithOffset - offset;
   const dateWithoutOffset = new Date(timestampWithoutOffset);
-  console.log(dateWithoutOffset);
-
+  // console.log(dateWithoutOffset);
+  //
   const deliveryDate = shipment?.PromisedDate;
   const indexOfT = deliveryDate?.indexOf("T");
   const dateWithoutTime = dateString?.substring(0, indexOfT);
