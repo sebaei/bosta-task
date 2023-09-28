@@ -1,6 +1,10 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setShipment } from "../redux/actions/";
 
 const Navbar = () => {
+  // const products = useSelector((state) => state.shipment?);
+  const dispatch = useDispatch();
   return (
     <div className="navbar">
       <div className="nav-first">

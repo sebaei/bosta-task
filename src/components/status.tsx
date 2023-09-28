@@ -1,9 +1,27 @@
 import React from "react";
 import axios from "axios";
-import { ProgressBar, Step } from "react-step-progress-bar";
-import "react-step-progress-bar/styles.css";
+import { useSelector } from "react-redux";
+import StepProgressBar from "react-step-progress";
+import "react-step-progress/dist/index.css";
 
 const baseURL = "https://tracking.bosta.co/shipments/track/7234258";
+
+function step2Validator() {
+  // return a boolean
+}
+
+function step3Validator() {
+  // return a boolean
+}
+
+function step4Validator() {
+  // return a boolean
+}
+
+const step1Content = <h1>Step 1 Content</h1>;
+const step2Content = <h1>Step 2 Content</h1>;
+const step3Content = <h1>Step 3 Content</h1>;
+const step4Content = <h1>STep 4 Content</h1>;
 
 const Status = () => {
   const [shipment, setShipment] = React.useState(null);
@@ -32,7 +50,7 @@ const Status = () => {
     <section>
       <div className="status">
         <div>
-          <p> {shipment?.TrackingNumber}رقم الشحنة</p>
+          <p>رقم الشحنة{shipment?.TrackingNumber}</p>
           <p>{shipment?.CurrentStatus.state}</p>
         </div>
         <div>
@@ -49,47 +67,38 @@ const Status = () => {
         </div>
       </div>
       {/* Progress bar */}
-      <ProgressBar
-        percent={25}
-        filledBackground="linear-gradient(to right, #fefb72, #f0bb31)"
-      >
-        <Step transition="scale">
-          {({ accomplished }) => (
-            <img
-              style={{ filter: `grayscale(${accomplished ? 0 : 80}%)` }}
-              width="30"
-              src="https://vignette.wikia.nocookie.net/pkmnshuffle/images/9/9d/Pichu.png/revision/latest?cb=20170407222851"
-            />
-          )}
-        </Step>
-        <Step transition="scale">
-          {({ accomplished }) => (
-            <img
-              style={{ filter: `grayscale(${accomplished ? 0 : 80}%)` }}
-              width="30"
-              src="https://vignette.wikia.nocookie.net/pkmnshuffle/images/9/97/Pikachu_%28Smiling%29.png/revision/latest?cb=20170410234508"
-            />
-          )}
-        </Step>
-        <Step transition="scale" position={25}>
-          {({ accomplished }) => (
-            <img
-              style={{ filter: `grayscale(${accomplished ? 0 : 80}%)` }}
-              width="30"
-              src="https://orig00.deviantart.net/493a/f/2017/095/5/4/raichu_icon_by_pokemonshuffle_icons-db4ryym.png"
-            />
-          )}
-        </Step>
-        <Step transition="scale" position={0}>
-          {({ accomplished }) => (
-            <img
-              style={{ filter: `grayscale(${accomplished ? 0 : 80}%)` }}
-              width="30"
-              src="https://orig00.deviantart.net/493a/f/2017/095/5/4/raichu_icon_by_pokemonshuffle_icons-db4ryym.png"
-            />
-          )}
-        </Step>
-      </ProgressBar>
+      <StepProgressBar
+        startingStep={0}
+        //e2fel teansition
+        // onSubmit={onFormSubmit}
+        steps={[
+          {
+            label: "Step 1",
+            subtitle: "10%",
+            name: "step 1",
+            content: step1Content,
+          },
+          {
+            label: "Step 2",
+            subtitle: "50%",
+            name: "step 2",
+            content: step2Content,
+          },
+          {
+            label: "Step 3",
+            subtitle: "50%",
+            name: "step 3",
+            content: step3Content,
+          },
+          {
+            label: "Step 4",
+            subtitle: "50%",
+            name: "step 4",
+            content: step4Content,
+          },
+        ]}
+      />
+      ;
     </section>
   );
 };

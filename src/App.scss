@@ -14,7 +14,7 @@ section {
   padding: 0px;
   display: flex;
   width: 100%;
-  flex-direction: row-reverse;
+  // flex-direction: row-reverse;
   justify-content: space-around;
 
   .nav-first {
@@ -22,13 +22,13 @@ section {
   }
   .nav-mid {
     display: flex;
-    flex-direction: row-reverse;
+    // flex-direction: row-reverse;
     justify-content: space-between;
   }
 
   .nav-last {
     display: flex;
-    flex-direction: row-reverse;
+    // flex-direction: row-reverse;
     .switch-lang {
       color: red;
       background: transparent;
@@ -39,13 +39,13 @@ section {
 }
 .status {
   display: flex;
-  flex-direction: row-reverse;
+  // flex-direction: row-reverse;
   justify-content: space-between;
 }
 
 .details-section {
   display: flex;
-  flex-direction: row-reverse;
+  // flex-direction: row-reverse;
   justify-content: flex-end;
   width: 100%;
 }
@@ -69,7 +69,7 @@ section {
 
 .contact-us {
   display: flex;
-  flex-direction: row-reverse;
+  // flex-direction: row-reverse;
 }
 
 .contact-btn {
