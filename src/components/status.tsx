@@ -17,10 +17,24 @@ const Status = () => {
 
   return (
     <section>
-      <p> {shipment?.TrackingNumber}رقم الشحنة</p>
-      <p>اخر تحديث {shipment?.CurrentStatus.timestamp}</p>
-      <p>اسم التاجر{shipment?.provider}</p>
-      <p>موعد التسليم خلال {shipment?.PromisedDate}</p>
+      <div className="status">
+        <div>
+          <p> {shipment?.TrackingNumber}رقم الشحنة</p>
+          <p>{shipment?.CurrentStatus.state}</p>
+        </div>
+        <div>
+          <p>اخر تحديث </p>
+          <p>{shipment?.CurrentStatus.timestamp}</p>
+        </div>
+        <div>
+          <p>اسم التاجر</p>
+          <p>{shipment?.provider}</p>
+        </div>
+        <div>
+          <p>موعد التسليم خلال </p>
+          <p>{shipment?.PromisedDate}</p>
+        </div>
+      </div>
       {/* Progress bar */}
       <ProgressBar
         percent={25}
