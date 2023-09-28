@@ -1,0 +1,78 @@
+body {
+  font-family: "Cairo";
+}
+
+.App {
+  padding: 20px 100px;
+}
+
+section {
+  text-align: right;
+}
+
+.navbar {
+  padding: 0px;
+  display: flex;
+  width: 100%;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+
+  .nav-first {
+    /* margin-left: 20px; */
+  }
+  .nav-mid {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+
+  .nav-last {
+    display: flex;
+    flex-direction: row-reverse;
+    .switch-lang {
+      color: red;
+      background: transparent;
+      border: 0px;
+      cursor: pointer;
+    }
+  }
+}
+.status {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+.details-section {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  width: 100%;
+}
+.details-table {
+  width: 67%;
+  float: right;
+  display: flex;
+  flex-direction: column;
+  // text-align: end;
+  // h4 {
+  //   float: right;
+  // }
+}
+// h4 {
+//   float: right;
+// }
+.address-contact {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-us {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.contact-btn {
+  display: flex;
+  flex-direction: column;
+}

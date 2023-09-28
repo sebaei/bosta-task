@@ -14,6 +14,19 @@ const Status = () => {
   }, []);
 
   console.log(shipment);
+  const dateString = shipment?.CurrentStatus.timestamp;
+  const date = new Date(dateString);
+  const timestampWithOffset = date.getTime();
+  const offset = date.getTimezoneOffset() * 60 * 1000;
+  console.log(offset);
+  const timestampWithoutOffset = timestampWithOffset - offset;
+  const dateWithoutOffset = new Date(timestampWithoutOffset);
+  console.log(dateWithoutOffset);
+
+  const deliveryDate = shipment?.PromisedDate;
+  const indexOfT = deliveryDate?.indexOf("T");
+  const dateWithoutTime = dateString?.substring(0, indexOfT);
+  const dateobj = new Date(dateWithoutTime);
 
   return (
     <section>
@@ -24,7 +37,7 @@ const Status = () => {
         </div>
         <div>
           <p>اخر تحديث </p>
-          <p>{shipment?.CurrentStatus.timestamp}</p>
+          <p>{dateWithoutOffset.toString().slice(0, 24)}</p>
         </div>
         <div>
           <p>اسم التاجر</p>
@@ -32,7 +45,7 @@ const Status = () => {
         </div>
         <div>
           <p>موعد التسليم خلال </p>
-          <p>{shipment?.PromisedDate}</p>
+          <p>{dateWithoutTime}</p>
         </div>
       </div>
       {/* Progress bar */}

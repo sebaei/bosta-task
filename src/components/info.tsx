@@ -2,7 +2,7 @@ import React from "react";
 
 const info = () => {
   return (
-    <div>
+    <div className="details-table">
       <h4>تفاصيل الشحنة</h4>
       <table>
         <tr>

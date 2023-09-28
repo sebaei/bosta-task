@@ -1,15 +1,17 @@
-import "./App.css";
+import "./App.scss";
 import Details from "./components/details.tsx";
 import Navbar from "./components/navbar.tsx";
 import Status from "./components/status.tsx";
 
 function App() {
   return (
-    <div className="App">
+    <>
       <Navbar />
-      <Status />
-      <Details />
-    </div>
+      <div className="App">
+        <Status />
+        <Details />
+      </div>
+    </>
   );
 }
 

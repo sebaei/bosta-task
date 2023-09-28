@@ -8,7 +8,7 @@ const Details = () => {
     <section className="details-section">
       <Info />
       <Address />
-      <Contact />
+      {/* <Contact /> */}
     </section>
   );
 };
