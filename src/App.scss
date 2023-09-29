@@ -1,5 +1,6 @@
 body {
   font-family: "Cairo";
+  font-weight: 500;
 }
 
 .App {
@@ -16,19 +17,30 @@ section {
   width: 100%;
   // flex-direction: row-reverse;
   justify-content: space-around;
+  border-bottom: 1px solid rgb(231, 231, 231);
 
   .nav-first {
     /* margin-left: 20px; */
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    // width: 20%;
+    svg {
+      // top: 100px;
+    }
   }
   .nav-mid {
     display: flex;
     // flex-direction: row-reverse;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    width: 50%;
   }
 
   .nav-last {
     display: flex;
     // flex-direction: row-reverse;
+    width: 25%;
+    justify-content: space-evenly;
     .switch-lang {
       color: red;
       background: transparent;
@@ -41,23 +53,77 @@ section {
   display: flex;
   // flex-direction: row-reverse;
   justify-content: space-between;
+  border: 1px solid rgb(231, 231, 231);
+  padding: 10px 20px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border-bottom: 0px;
+  margin-top: 30px;
+}
+
+.bar {
+  border: 1px solid rgb(231, 231, 231);
+  padding: 10px 25px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+
+  ._2Jtxm::before {
+    right: -50%;
+    transition: background-position 0ms ease-in-out;
+  }
 }
 
 .details-section {
   display: flex;
   // flex-direction: row-reverse;
-  justify-content: flex-end;
-  width: 100%;
+  // justify-content: flex-end;
+  // width: 100%;
+  // padding: 10px 50px;
+  justify-content: space-between;
 }
 .details-table {
-  width: 67%;
-  float: right;
+  width: 62%;
+  // float: right;
   display: flex;
   flex-direction: column;
-  // text-align: end;
-  // h4 {
-  //   float: right;
+
+  // table {
+  //   border: 1px solid rgb(231, 231, 231);
+  //   padding: 0px 20px;
+  //   border-radius: 10px;
+  //   border-spacing: 0px;
+  //   thead tr td {
+  //     border: 1px solid rgb(231, 231, 231);
+  //   }
+  //   tbody tr td {
+  //     border: 1px solid rgb(231, 231, 231);
+  //     // padding: 0px 50px;
+  //     // border-radius: 10px;
+  //   }
   // }
+  table {
+    // border-collapse: collapse;
+    border-spacing: 0px;
+    border: 1px solid rgb(231, 231, 231);
+    border-radius: 10px;
+    // display: block;
+    thead {
+      background: rgba(231, 231, 231, 0.3);
+    }
+  }
+  tr::first {
+    border: none;
+  }
+  th {
+    border-top: 1px solid rgb(231, 231, 231);
+    border-bottom: 1px solid rgb(231, 231, 231);
+    padding: 10px 20px;
+  }
+  td {
+    border-top: 1px solid rgb(231, 231, 231);
+    border-bottom: 1px solid rgb(231, 231, 231);
+    padding: 10px 20px;
+  }
 }
 // h4 {
 //   float: right;
@@ -65,14 +131,37 @@ section {
 .address-contact {
   display: flex;
   flex-direction: column;
-}
-
-.contact-us {
-  display: flex;
-  // flex-direction: row-reverse;
+  width: 35%;
+  // margin-right: 15px;
+  .address {
+    border: 1px solid rgb(231, 231, 231);
+    border-radius: 10px;
+    background-color: rgba(231, 231, 231, 0.3);
+    padding: 15px 15px;
+    margin-bottom: 15px;
+  }
+  .contact-us {
+    display: flex;
+    justify-content: space-around;
+    border: 1px solid rgb(231, 231, 231);
+    border-radius: 10px;
+    padding: 10px 15px;
+    // flex-direction: row-reverse;
+    .contact-img {
+      margin-left: 15px;
+    }
+  }
 }
 
 .contact-btn {
   display: flex;
   flex-direction: column;
+
+  button {
+    background-color: red;
+    color: white;
+    border-radius: 8px;
+    border: transparent;
+    padding: 8px 15px;
+  }
 }

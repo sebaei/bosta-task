@@ -73,38 +73,39 @@ const Status = () => {
         </div>
       </div>
       {/* Progress bar */}
-      <StepProgressBar
-        startingStep={0}
-        //e2fel teansition
-        // onSubmit={onFormSubmit}
-        steps={[
-          {
-            label: "Step 1",
-            subtitle: "10%",
-            name: "step 1",
-            content: step1Content,
-          },
-          {
-            label: "Step 2",
-            subtitle: "50%",
-            name: "step 2",
-            content: step2Content,
-          },
-          {
-            label: "Step 3",
-            subtitle: "50%",
-            name: "step 3",
-            content: step3Content,
-          },
-          {
-            label: "Step 4",
-            subtitle: "50%",
-            name: "step 4",
-            content: step4Content,
-          },
-        ]}
-      />
-      ;
+      <div className="bar">
+        <StepProgressBar
+          startingStep={0}
+          //e2fel teansition
+          // onSubmit={onFormSubmit}
+          steps={[
+            {
+              label: "تم انشاء الشحنة",
+              // subtitle: "10%",
+              name: "step 1",
+              content: step1Content,
+            },
+            {
+              label: "تم استلام الشحنة من التاجر",
+              // subtitle: "50%",
+              name: "step 2",
+              content: step2Content,
+            },
+            {
+              label: "الشحنة خرجت للتسليم",
+              // subtitle: "50%",
+              name: "step 3",
+              content: step3Content,
+            },
+            {
+              label: "تم التسليم",
+              // subtitle: "50%",
+              name: "step 4",
+              content: step4Content,
+            },
+          ]}
+        />
+      </div>
     </section>
   );
 };

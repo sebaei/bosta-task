@@ -9,9 +9,9 @@ const Navbar = () => {
     <div className="navbar">
       <div className="nav-first">
         <svg
-          width="5em"
-          height="5em"
-          viewBox="0 0 112 62"
+          width="6em"
+          height="3em"
+          viewBox="0 0 102 62"
           fill="currentColor"
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
