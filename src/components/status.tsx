@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import StepProgressBar from "react-step-progress";
 import "react-step-progress/dist/index.css";
 import { setShipment } from "../redux/actions/index.ts";
+import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 const baseURL = "https://tracking.bosta.co/shipments/track/7234258";
 
@@ -19,11 +21,6 @@ function step4Validator() {
   // return a boolean
 }
 
-const step1Content = <h1>Step 1 Content</h1>;
-const step2Content = <h1>Step 2 Content</h1>;
-const step3Content = <h1>Step 3 Content</h1>;
-const step4Content = <h1>STep 4 Content</h1>;
-
 const Status = () => {
   const products = useSelector((state) => state.allShipments.shipment);
   console.log(products);
@@ -36,6 +33,9 @@ const Status = () => {
       setSHipmentData(response.data);
     });
   }, []);
+  const { t, i18n } = useTranslation();
+
+  var currentLanguage = i18n.language;
 
   // console.log(shipment);
   const dateString = shipment?.CurrentStatus.timestamp;
@@ -52,56 +52,57 @@ const Status = () => {
   const dateWithoutTime = dateString?.substring(0, indexOfT);
   const dateobj = new Date(dateWithoutTime);
 
+  let firstStep = t("progressBar.first");
+  let secondStep = t("progressBar.second");
+  let thirdStep = t("progressBar.third");
+  let fourthStep = t("progressBar.fourth");
   return (
     <section>
       <div className="status">
         <div>
-          <p>رقم الشحنة{shipment?.TrackingNumber}</p>
+          <p>
+            {t("status.number")} {shipment?.TrackingNumber}
+          </p>
           <p>{shipment?.CurrentStatus.state}</p>
         </div>
         <div>
-          <p>اخر تحديث </p>
+          <p>{t("status.update")}</p>
           <p>{dateWithoutOffset.toString().slice(0, 24)}</p>
         </div>
         <div>
-          <p>اسم التاجر</p>
+          <p>{t("status.provider")}</p>
           <p>{shipment?.provider}</p>
         </div>
         <div>
-          <p>موعد التسليم خلال </p>
+          <p>{t("status.delivery")}</p>
           <p>{dateWithoutTime}</p>
         </div>
       </div>
       {/* Progress bar */}
-      <div className="bar">
+      <div className={currentLanguage === "ar" ? "bar" : "bar en"}>
         <StepProgressBar
-          startingStep={0}
-          //e2fel teansition
+          startingStep={3}
           // onSubmit={onFormSubmit}
           steps={[
             {
-              label: "تم انشاء الشحنة",
+              label: firstStep,
               // subtitle: "10%",
               name: "step 1",
-              content: step1Content,
             },
             {
-              label: "تم استلام الشحنة من التاجر",
+              label: secondStep,
               // subtitle: "50%",
               name: "step 2",
-              content: step2Content,
             },
             {
-              label: "الشحنة خرجت للتسليم",
+              label: thirdStep,
               // subtitle: "50%",
               name: "step 3",
-              content: step3Content,
             },
             {
-              label: "تم التسليم",
+              label: fourthStep,
               // subtitle: "50%",
               name: "step 4",
-              content: step4Content,
             },
           ]}
         />

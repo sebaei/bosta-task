@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import store from "./redux/store.tsx";
 import { Provider } from "react-redux";
+import "./i18n.tsx";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

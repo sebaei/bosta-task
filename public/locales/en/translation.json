@@ -1,0 +1,38 @@
+{
+  "navMid": {
+    "first": "Main",
+    "second": "Prices",
+    "third": "Contact Sales"
+  },
+  "navLast": {
+    "first": "Track Shipment",
+    "second": "Sign In"
+  },
+  "status": {
+    "number": "Shipment number",
+    "update": "Latest update",
+    "provider": "Seller",
+    "delivery": "Delivery due"
+  },
+  "progressBar": {
+    "first": "Shipment created",
+    "second": "Package received",
+    "third": "Out for delivery",
+    "fourth": "Delivered"
+  },
+  "table": {
+    "title": "Shipment Details",
+    "header": {
+      "firstCol": "Branch",
+      "secondCol": "Date",
+      "thirdCol": "Time",
+      "fourthCol": "Details"
+    }
+  },
+
+  "address": "Delivery Address",
+  "contact": {
+    "message": "Have a problem with your shipment ?",
+    "button": "Report problem"
+  }
+}

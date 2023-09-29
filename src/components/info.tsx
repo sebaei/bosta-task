@@ -1,16 +1,19 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
-const info = () => {
+const Info = () => {
+  const { t, i18n } = useTranslation();
+
   return (
     <div className="details-table">
-      <h4>تفاصيل الشحنة</h4>
+      <h4>{t("table.title")}</h4>
       <table>
         <thead>
           <tr>
-            <th>الفرع</th>
-            <th>التاريخ</th>
-            <th>الوقت</th>
-            <th>تفاصيل</th>
+            <th>{t("table.header.firstCol")}</th>
+            <th>{t("table.header.secondCol")}</th>
+            <th>{t("table.header.thirdCol")}</th>
+            <th>{t("table.header.fourthCol")}</th>
           </tr>
         </thead>
         <tbody>
@@ -44,4 +47,4 @@ const info = () => {
   );
 };
 
-export default info;
+export default Info;

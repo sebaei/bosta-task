@@ -1,11 +1,11 @@
 import React from "react";
 
-const bostaEN = () => {
+export const BostaEN = () => {
   return (
     <svg
-      width="1em"
-      height="1em"
-      viewBox="0 0 111 34"
+      width="6em"
+      height="3em"
+      viewBox="0 0 102 62"
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
@@ -40,12 +40,12 @@ const bostaEN = () => {
   );
 };
 
-const bostaAR = () => {
+export const BostaAR = () => {
   return (
     <svg
-      width="1em"
-      height="1em"
-      viewBox="0 0 112 32"
+      width="6em"
+      height="3em"
+      viewBox="0 0 102 62"
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
