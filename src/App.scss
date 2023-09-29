@@ -1,6 +1,15 @@
+@font-face {
+  font-family: "Cairo-Regular";
+  src: local("Cairo-Regular"),
+    url("./fonts/Cairo-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Cairo-Bold";
+  src: local("Cairo-Bold"), url("./fonts/Cairo-Bold.ttf") format("truetype");
+}
+
 body {
-  font-family: "Cairo";
-  font-weight: 500;
+  font-family: "Cairo-Regular";
 }
 
 .App {
