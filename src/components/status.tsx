@@ -42,7 +42,7 @@ const Status = () => {
   // }, []);
   const { t, i18n } = useTranslation();
 
-  var currentLanguage = i18n.language;
+  var currentLanguage = i18n.language === "ar";
 
   const dateString = shipment?.CurrentStatus?.timestamp;
   const date = new Date(dateString);
@@ -141,7 +141,7 @@ const Status = () => {
       <section className="step-wizard">
         <ul className="step-wizard-list">
           <li
-            className={` ${
+            className={`${currentLanguage ? "" : "eng"} ${
               currentStateDelivered
                 ? "step-wizard-item"
                 : currentStateCancelled
@@ -163,7 +163,7 @@ const Status = () => {
             <span className="progress-label">{t("progressBar.first")}</span>
           </li>
           <li
-            className={` ${
+            className={`${currentLanguage ? "" : "eng"} ${
               currentStateDelivered
                 ? "step-wizard-item"
                 : currentStateCancelled
@@ -180,7 +180,7 @@ const Status = () => {
             }`}
           >
             <span
-              className={`${
+              className={`${currentLanguage ? "" : "eng"} ${
                 currentStateDelivered
                   ? "progress-count"
                   : currentStateCancelled
@@ -193,7 +193,7 @@ const Status = () => {
             <span className="progress-label">{t("progressBar.second")}</span>
           </li>
           <li
-            className={` ${
+            className={`${currentLanguage ? "" : "eng"} ${
               currentStateDelivered
                 ? "step-wizard-item"
                 : currentStateCancelled
@@ -215,7 +215,7 @@ const Status = () => {
             <span className="progress-label">{t("progressBar.third")}</span>
           </li>
           <li
-            className={` ${
+            className={`${currentLanguage ? "" : "eng"} ${
               currentStateDelivered
                 ? "step-wizard-item"
                 : currentStateCancelled
