@@ -11,7 +11,7 @@ import { Delivered, OutDelivery, Received } from "../assets/SVGs.tsx";
 const baseURL = "https://tracking.bosta.co/shipments/track/7234258";
 
 const Status = () => {
-  var shipment = useSelector((state) => state.allShipments.shipment);
+  var shipment = useSelector((state) => state?.allShipments?.shipment);
 
   var created = shipment?.TransitEvents?.filter(
     (event) => event?.state === "TICKET_CREATED"
@@ -23,6 +23,8 @@ const Status = () => {
   var outDelivery = shipment?.TransitEvents?.filter(
     (event) => event?.state === "OUT_FOR_DELIVERY"
   );
+  console.log(outDelivery);
+
   var delivered = shipment?.TransitEvents?.filter((event) =>
     event?.state.includes("DELIVERED")
   );
@@ -54,15 +56,17 @@ const Status = () => {
   const dateWithoutTime = dateString?.substring(0, indexOfT);
   const dateobj = new Date(dateWithoutTime);
 
-  let firstStep = t("progressBar.first");
-  let secondStep = t("progressBar.second");
-  let thirdStep = t("progressBar.third");
-  let fourthStep = t("progressBar.fourth");
   const currentStateDelivered =
     shipment?.CurrentStatus?.state.includes("DELIVERED");
   const currentStateCancelled =
     shipment?.CurrentStatus?.state.includes("CANCELLED");
   const currentStatePending = !currentStateDelivered && !currentStateCancelled;
+
+  var isCreated = created && created[0] ? true : false;
+
+  var isReceived = received && received[0] ? true : false;
+  var isOutDelivery = outDelivery && outDelivery[0] ? true : false;
+  var isDelivered = delivered && delivered[0] ? true : false;
 
   return (
     <section>
@@ -137,16 +141,26 @@ const Status = () => {
       <section className="step-wizard">
         <ul className="step-wizard-list">
           <li className={`step-wizard-item`}>
-            <span className="progress-count">1</span>
+            <span
+              className={`${
+                currentStateDelivered
+                  ? "progress-count"
+                  : currentStateCancelled
+                  ? "progress-count cancel"
+                  : "progress-count pending"
+              }`}
+            >
+              1
+            </span>
             <span className="progress-label">{t("progressBar.first")}</span>
           </li>
           <li
             className={`step-wizard-item  ${
-              outDelivery[0]
+              isOutDelivery
                 ? ""
-                : received[0]
+                : isReceived
                 ? ""
-                : created[0]
+                : isCreated
                 ? "current-item"
                 : ""
             }`}
@@ -158,7 +172,7 @@ const Status = () => {
           </li>
           <li
             className={`step-wizard-item  ${
-              outDelivery[0] ? "" : received[0] ? "current-item" : ""
+              isOutDelivery ? "" : isReceived ? "current-item" : ""
             }`}
           >
             <span className="progress-count">
@@ -168,7 +182,7 @@ const Status = () => {
           </li>
           <li
             className={`step-wizard-item  ${
-              delivered[0] ? "" : outDelivery[0] ? "current-item" : ""
+              isDelivered ? "" : isOutDelivery ? "current-item" : ""
             }`}
           >
             <span className="progress-count">

@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 const Info = () => {
   const { t, i18n } = useTranslation();
 
-  const shipment = useSelector((state) => state.allShipments.shipment);
+  const shipment = useSelector((state) => state?.allShipments?.shipment);
   console.log(shipment);
 
   const created = shipment?.TransitEvents?.filter(
@@ -81,6 +81,10 @@ const Info = () => {
   // let [deliveredDate, deliveredTime] = deliveredTimestamp?.split("T");
   // deliveredTime = deliveredTime?.substring(0, 5);
 
+  var isReceived = received && received[0] ? true : false;
+  var isOutDelivery = outDelivery && outDelivery[0] ? true : false;
+  var isDelivered = delivered && delivered[0] ? true : false;
+
   return (
     <div className="details-table">
       <h4>{t("table.title")}</h4>
@@ -100,7 +104,7 @@ const Info = () => {
             <td>{createdTime}</td>
             <td>{t("progressBar.first")}</td>
           </tr>
-          {received[0] && (
+          {isReceived && (
             <tr>
               <td>مدينة نصر</td>
               <td>{receivedDate}</td>
@@ -108,7 +112,7 @@ const Info = () => {
               <td>{t("progressBar.second")}</td>
             </tr>
           )}
-          {outDelivery[0] && (
+          {isOutDelivery && (
             <tr>
               <td>مدينة نصر</td>
               <td>{outDate}</td>
@@ -116,7 +120,7 @@ const Info = () => {
               <td>{t("progressBar.third")}</td>
             </tr>
           )}
-          {delivered[0] && (
+          {isDelivered && (
             <tr>
               <td>مدينة نصر</td>
               <td>{deliveredDate}</td>

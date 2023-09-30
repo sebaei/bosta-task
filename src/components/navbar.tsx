@@ -27,7 +27,7 @@ const Navbar = () => {
     axios.get(firstURl).then((response) => {
       dispatch(setShipment(response.data));
     });
-  });
+  }, []);
 
   function getShipment(track) {
     var baseURL = `https://tracking.bosta.co/shipments/track/${track}`;
