@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setShipment } from "../redux/actions/";
+import { setShipment } from "../redux/actions/index.ts";
 import { useTranslation } from "react-i18next";
-import { BostaAR, BostaEN } from "../assets/SVGs.tsx";
+import { BostaAR, BostaEN, Magnify } from "../assets/SVGs.tsx";
+import axios from "axios";
 
 const locales = {
   en: { title: "ENG" },
@@ -11,13 +12,23 @@ const locales = {
 
 const Navbar = () => {
   // const products = useSelector((state) => state.shipment?);
-  const [lang, setLang] = useState("AR");
+  const [track, setTrack] = useState("");
+
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
   var currentLanguage = i18n.language;
   var currentDir = currentLanguage === "ar" ? "rtl" : "ltr";
   document.documentElement.lang = currentLanguage;
   document.documentElement.dir = currentDir;
+
+  function getShipment(track) {
+    var baseURL = `https://tracking.bosta.co/shipments/track/${track}`;
+
+    axios.get(baseURL).then((response) => {
+      dispatch(setShipment(response.data));
+    });
+  }
+
   return (
     <div className="navbar">
       <div className="nav-first">
@@ -29,7 +40,24 @@ const Navbar = () => {
         <h4>{t("navMid.third")}</h4>
       </div>
       <div className="nav-last">
-        <h4>{t("navLast.first")}</h4>
+        <div className="dropdown">
+          <h4>{t("navLast.first")}</h4>
+          <div className="dropdown-content">
+            <h4 className="search-btn">{t("navLast.first")}</h4>
+            <div className="search">
+              <input
+                type="text"
+                placeholder="رقم التتبع"
+                value={track}
+                className="search-input"
+                onChange={(e) => setTrack(e.target.value)}
+              />
+              <span className="icon" onClick={() => getShipment(track)}>
+                <Magnify />
+              </span>
+            </div>
+          </div>
+        </div>
         <h4>{t("navLast.second")}</h4>
         {/* <div className="dropdown"> */}
         <h4

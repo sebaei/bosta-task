@@ -9,43 +9,46 @@ import { useTranslation } from "react-i18next";
 
 const baseURL = "https://tracking.bosta.co/shipments/track/7234258";
 
-function step2Validator() {
-  // return a boolean
-}
-
-function step3Validator() {
-  // return a boolean
-}
-
-function step4Validator() {
-  // return a boolean
-}
-
 const Status = () => {
-  const products = useSelector((state) => state.allShipments.shipment);
-  console.log(products);
+  const shipment = useSelector((state) => state.allShipments.shipment);
+  console.log(shipment.TransitEvents);
 
-  const dispatch = useDispatch();
-  const [shipment, setSHipmentData] = React.useState(null);
-  React.useEffect(() => {
-    axios.get(baseURL).then((response) => {
-      dispatch(setShipment(response.data));
-      setSHipmentData(response.data);
-    });
-  }, []);
+  const received = shipment?.TransitEvents?.filter(
+    (event) => event?.state === "PACKAGE_RECEIVED"
+  );
+
+  console.log(received);
+
+  const outDelivery = shipment?.TransitEvents?.filter(
+    (event) => event?.state === "OUT_FOR_DELIVERY"
+  );
+
+  console.log(outDelivery);
+
+  const delivered = shipment?.TransitEvents?.filter((event) =>
+    event?.state.includes("DELIVERED")
+  );
+
+  console.log(delivered);
+
+  // const dispatch = useDispatch();
+  // const [shipment, setSHipmentData] = React.useState(null);
+  // React.useEffect(() => {
+  //   axios.get(baseURL).then((response) => {
+  //     dispatch(setShipment(response.data));
+  //     setSHipmentData(response.data);
+  //   });
+  // }, []);
   const { t, i18n } = useTranslation();
 
   var currentLanguage = i18n.language;
 
-  // console.log(shipment);
-  const dateString = shipment?.CurrentStatus.timestamp;
+  const dateString = shipment?.CurrentStatus?.timestamp;
   const date = new Date(dateString);
   const timestampWithOffset = date.getTime();
   const offset = date.getTimezoneOffset() * 60 * 1000;
-  // console.log(offset);
   const timestampWithoutOffset = timestampWithOffset - offset;
   const dateWithoutOffset = new Date(timestampWithoutOffset);
-  // console.log(dateWithoutOffset);
   //
   const deliveryDate = shipment?.PromisedDate;
   const indexOfT = deliveryDate?.indexOf("T");
@@ -63,7 +66,7 @@ const Status = () => {
           <p>
             {t("status.number")} {shipment?.TrackingNumber}
           </p>
-          <p>{shipment?.CurrentStatus.state}</p>
+          <p>{shipment?.CurrentStatus?.state}</p>
         </div>
         <div>
           <p>{t("status.update")}</p>
@@ -80,32 +83,61 @@ const Status = () => {
       </div>
       {/* Progress bar */}
       <div className={currentLanguage === "ar" ? "bar" : "bar en"}>
-        <StepProgressBar
-          startingStep={3}
-          // onSubmit={onFormSubmit}
-          steps={[
-            {
-              label: firstStep,
-              // subtitle: "10%",
-              name: "step 1",
-            },
-            {
-              label: secondStep,
-              // subtitle: "50%",
-              name: "step 2",
-            },
-            {
-              label: thirdStep,
-              // subtitle: "50%",
-              name: "step 3",
-            },
-            {
-              label: fourthStep,
-              // subtitle: "50%",
-              name: "step 4",
-            },
-          ]}
-        />
+        {shipment?.TrackingNumber ? (
+          <StepProgressBar
+            startingStep={delivered ? 3 : outDelivery ? 2 : received ? 1 : 0}
+            // onSubmit={onFormSubmit}
+            steps={[
+              {
+                label: t("progressBar.first"),
+                // subtitle: "10%",
+                name: "step 1",
+              },
+              {
+                label: t("progressBar.second"),
+                // subtitle: "50%",
+                name: "step 2",
+              },
+              {
+                label: t("progressBar.third"),
+                // subtitle: "50%",
+                name: "step 3",
+              },
+              {
+                label: t("progressBar.fourth"),
+                // subtitle: "50%",
+                name: "step 4",
+              },
+            ]}
+          />
+        ) : (
+          <StepProgressBar
+            startingStep={0}
+            // onSubmit={onFormSubmit}
+            steps={[
+              {
+                label: t("progressBar.first"),
+                // subtitle: "10%",
+                name: "step 1",
+              },
+              {
+                label: secondStep,
+                // subtitle: "50%",
+                name: "step 2",
+              },
+              {
+                label: thirdStep,
+                // subtitle: "50%",
+                name: "step 3",
+              },
+              {
+                label: fourthStep,
+                // subtitle: "50%",
+                name: "step 4",
+              },
+            ]}
+          />
+        )}
       </div>
     </section>
   );
