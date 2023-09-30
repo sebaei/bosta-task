@@ -6,30 +6,29 @@ import "react-step-progress/dist/index.css";
 import { setShipment } from "../redux/actions/index.ts";
 import { t } from "i18next";
 import { useTranslation } from "react-i18next";
+import { Delivered, OutDelivery, Received } from "../assets/SVGs.tsx";
 
 const baseURL = "https://tracking.bosta.co/shipments/track/7234258";
 
 const Status = () => {
-  const shipment = useSelector((state) => state.allShipments.shipment);
-  console.log(shipment.TransitEvents);
+  var shipment = useSelector((state) => state.allShipments.shipment);
 
-  const received = shipment?.TransitEvents?.filter(
+  var created = shipment?.TransitEvents?.filter(
+    (event) => event?.state === "TICKET_CREATED"
+  );
+
+  var received = shipment?.TransitEvents?.filter(
     (event) => event?.state === "PACKAGE_RECEIVED"
   );
-
-  console.log(received);
-
-  const outDelivery = shipment?.TransitEvents?.filter(
+  var outDelivery = shipment?.TransitEvents?.filter(
     (event) => event?.state === "OUT_FOR_DELIVERY"
   );
-
-  console.log(outDelivery);
-
-  const delivered = shipment?.TransitEvents?.filter((event) =>
+  var delivered = shipment?.TransitEvents?.filter((event) =>
     event?.state.includes("DELIVERED")
   );
 
-  console.log(delivered);
+  console.log(created);
+  console.log(received);
 
   // const dispatch = useDispatch();
   // const [shipment, setSHipmentData] = React.useState(null);
@@ -50,7 +49,7 @@ const Status = () => {
   const timestampWithoutOffset = timestampWithOffset - offset;
   const dateWithoutOffset = new Date(timestampWithoutOffset);
   //
-  const deliveryDate = shipment?.PromisedDate;
+  const deliveryDate = shipment?.PromisedDate || shipment?.CreateDate;
   const indexOfT = deliveryDate?.indexOf("T");
   const dateWithoutTime = dateString?.substring(0, indexOfT);
   const dateobj = new Date(dateWithoutTime);
@@ -59,30 +58,50 @@ const Status = () => {
   let secondStep = t("progressBar.second");
   let thirdStep = t("progressBar.third");
   let fourthStep = t("progressBar.fourth");
+  const currentStateDelivered =
+    shipment?.CurrentStatus?.state.includes("DELIVERED");
+  const currentStateCancelled =
+    shipment?.CurrentStatus?.state.includes("CANCELLED");
+  const currentStatePending = !currentStateDelivered && !currentStateCancelled;
+
   return (
     <section>
       <div className="status">
         <div>
-          <p>
+          <p className="status-header">
             {t("status.number")} {shipment?.TrackingNumber}
           </p>
-          <p>{shipment?.CurrentStatus?.state}</p>
+          <p
+            className={
+              currentStateDelivered
+                ? "text-green"
+                : currentStateCancelled
+                ? "text-red"
+                : "text-yellow"
+            }
+          >
+            {currentStateDelivered
+              ? t("status.delivered")
+              : currentStateCancelled
+              ? t("status.cancelled")
+              : t("status.pending")}{" "}
+          </p>
         </div>
         <div>
-          <p>{t("status.update")}</p>
+          <p className="status-header">{t("status.update")}</p>
           <p>{dateWithoutOffset.toString().slice(0, 24)}</p>
         </div>
         <div>
-          <p>{t("status.provider")}</p>
+          <p className="status-header">{t("status.provider")}</p>
           <p>{shipment?.provider}</p>
         </div>
         <div>
-          <p>{t("status.delivery")}</p>
+          <p className="status-header">{t("status.delivery")}</p>
           <p>{dateWithoutTime}</p>
         </div>
       </div>
       {/* Progress bar */}
-      <div className={currentLanguage === "ar" ? "bar" : "bar en"}>
+      {/* <div className={currentLanguage === "ar" ? "bar" : "bar en"}>
         {shipment?.TrackingNumber ? (
           <StepProgressBar
             startingStep={delivered ? 3 : outDelivery ? 2 : received ? 1 : 0}
@@ -90,55 +109,75 @@ const Status = () => {
             steps={[
               {
                 label: t("progressBar.first"),
-                // subtitle: "10%",
                 name: "step 1",
+                content: "step 1",
               },
               {
                 label: t("progressBar.second"),
-                // subtitle: "50%",
                 name: "step 2",
+                content: "step 2",
               },
               {
                 label: t("progressBar.third"),
-                // subtitle: "50%",
                 name: "step 3",
+                content: "step 3",
               },
               {
                 label: t("progressBar.fourth"),
-                // subtitle: "50%",
                 name: "step 4",
+                content: "step 4",
               },
             ]}
           />
         ) : (
-          <StepProgressBar
-            startingStep={0}
-            // onSubmit={onFormSubmit}
-            steps={[
-              {
-                label: t("progressBar.first"),
-                // subtitle: "10%",
-                name: "step 1",
-              },
-              {
-                label: secondStep,
-                // subtitle: "50%",
-                name: "step 2",
-              },
-              {
-                label: thirdStep,
-                // subtitle: "50%",
-                name: "step 3",
-              },
-              {
-                label: fourthStep,
-                // subtitle: "50%",
-                name: "step 4",
-              },
-            ]}
-          />
+          <div className="enter-text">Enter number to track shipment</div>
         )}
-      </div>
+      </div> */}
+
+      <section className="step-wizard">
+        <ul className="step-wizard-list">
+          <li className={`step-wizard-item`}>
+            <span className="progress-count">1</span>
+            <span className="progress-label">{t("progressBar.first")}</span>
+          </li>
+          <li
+            className={`step-wizard-item  ${
+              outDelivery[0]
+                ? ""
+                : received[0]
+                ? ""
+                : created[0]
+                ? "current-item"
+                : ""
+            }`}
+          >
+            <span className="progress-count">
+              <Received />
+            </span>
+            <span className="progress-label">{t("progressBar.second")}</span>
+          </li>
+          <li
+            className={`step-wizard-item  ${
+              outDelivery[0] ? "" : received[0] ? "current-item" : ""
+            }`}
+          >
+            <span className="progress-count">
+              <OutDelivery />
+            </span>
+            <span className="progress-label">{t("progressBar.third")}</span>
+          </li>
+          <li
+            className={`step-wizard-item  ${
+              delivered[0] ? "" : outDelivery[0] ? "current-item" : ""
+            }`}
+          >
+            <span className="progress-count">
+              <Delivered />
+            </span>
+            <span className="progress-label">{t("progressBar.fourth")}</span>
+          </li>
+        </ul>
+      </section>
     </section>
   );
 };

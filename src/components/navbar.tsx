@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setShipment } from "../redux/actions/index.ts";
 import { useTranslation } from "react-i18next";
@@ -20,6 +20,14 @@ const Navbar = () => {
   var currentDir = currentLanguage === "ar" ? "rtl" : "ltr";
   document.documentElement.lang = currentLanguage;
   document.documentElement.dir = currentDir;
+
+  useEffect(() => {
+    var firstURl = `https://tracking.bosta.co/shipments/track/7234258`;
+
+    axios.get(firstURl).then((response) => {
+      dispatch(setShipment(response.data));
+    });
+  });
 
   function getShipment(track) {
     var baseURL = `https://tracking.bosta.co/shipments/track/${track}`;
@@ -47,12 +55,15 @@ const Navbar = () => {
             <div className="search">
               <input
                 type="text"
-                placeholder="رقم التتبع"
+                placeholder={t("navLast.track")}
                 value={track}
                 className="search-input"
                 onChange={(e) => setTrack(e.target.value)}
               />
-              <span className="icon" onClick={() => getShipment(track)}>
+              <span
+                className={currentLanguage === "ar" ? "icon" : "icon en"}
+                onClick={() => getShipment(track)}
+              >
                 <Magnify />
               </span>
             </div>

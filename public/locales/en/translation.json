@@ -6,9 +6,13 @@
   },
   "navLast": {
     "first": "Track Shipment",
-    "second": "Sign In"
+    "second": "Sign In",
+    "track": "Tracking number"
   },
   "status": {
+    "delivered": "Delivered",
+    "cancelled": "Cancelled",
+    "pending": "Pending",
     "number": "Shipment number",
     "update": "Latest update",
     "provider": "Seller",
