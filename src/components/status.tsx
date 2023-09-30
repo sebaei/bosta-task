@@ -140,7 +140,15 @@ const Status = () => {
 
       <section className="step-wizard">
         <ul className="step-wizard-list">
-          <li className={`step-wizard-item`}>
+          <li
+            className={` ${
+              currentStateDelivered
+                ? "step-wizard-item"
+                : currentStateCancelled
+                ? "step-wizard-item cancel"
+                : "step-wizard-item pending"
+            }`}
+          >
             <span
               className={`${
                 currentStateDelivered
@@ -155,7 +163,13 @@ const Status = () => {
             <span className="progress-label">{t("progressBar.first")}</span>
           </li>
           <li
-            className={`step-wizard-item  ${
+            className={` ${
+              currentStateDelivered
+                ? "step-wizard-item"
+                : currentStateCancelled
+                ? "step-wizard-item cancel"
+                : "step-wizard-item pending"
+            }  ${
               isOutDelivery
                 ? ""
                 : isReceived
@@ -165,27 +179,59 @@ const Status = () => {
                 : ""
             }`}
           >
-            <span className="progress-count">
+            <span
+              className={`${
+                currentStateDelivered
+                  ? "progress-count"
+                  : currentStateCancelled
+                  ? "progress-count cancel"
+                  : "progress-count pending"
+              }`}
+            >
               <Received />
             </span>
             <span className="progress-label">{t("progressBar.second")}</span>
           </li>
           <li
-            className={`step-wizard-item  ${
-              isOutDelivery ? "" : isReceived ? "current-item" : ""
-            }`}
+            className={` ${
+              currentStateDelivered
+                ? "step-wizard-item"
+                : currentStateCancelled
+                ? "step-wizard-item cancel"
+                : "step-wizard-item pending"
+            }  ${isOutDelivery ? "" : isReceived ? "current-item" : ""}`}
           >
-            <span className="progress-count">
+            <span
+              className={`${
+                currentStateDelivered
+                  ? "progress-count"
+                  : currentStateCancelled
+                  ? "progress-count cancel"
+                  : "progress-count pending"
+              }`}
+            >
               <OutDelivery />
             </span>
             <span className="progress-label">{t("progressBar.third")}</span>
           </li>
           <li
-            className={`step-wizard-item  ${
-              isDelivered ? "" : isOutDelivery ? "current-item" : ""
-            }`}
+            className={` ${
+              currentStateDelivered
+                ? "step-wizard-item"
+                : currentStateCancelled
+                ? "step-wizard-item cancel"
+                : "step-wizard-item pending"
+            }  ${isDelivered ? "" : isOutDelivery ? "current-item" : ""}`}
           >
-            <span className="progress-count">
+            <span
+              className={`${
+                currentStateDelivered
+                  ? "progress-count"
+                  : currentStateCancelled
+                  ? "progress-count cancel"
+                  : "progress-count pending"
+              }`}
+            >
               <Delivered />
             </span>
             <span className="progress-label">{t("progressBar.fourth")}</span>

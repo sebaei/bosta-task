@@ -237,6 +237,28 @@ body {
   transform: translateX(50%);
   z-index: -10;
 }
+.step-wizard-item.pending + .step-wizard-item.pending:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 19px;
+  background: rgb(255, 217, 0);
+  width: 100%;
+  height: 4px;
+  transform: translateX(50%);
+  z-index: -10;
+}
+.step-wizard-item.cancel + .step-wizard-item.cancel:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 19px;
+  background: red;
+  width: 100%;
+  height: 4px;
+  transform: translateX(50%);
+  z-index: -10;
+}
 
 .progress-count {
   height: 40px;
@@ -257,6 +279,32 @@ body {
   width: 40px;
   background: rgb(55, 134, 55);
   border: 0.25px solid rgb(55, 134, 55);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  z-index: -10;
+}
+.progress-count.cancel:after {
+  content: "";
+  height: 40px;
+  width: 40px;
+  background: red;
+  border: 0.25px solid red;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  z-index: -10;
+}
+.progress-count.pending:after {
+  content: "";
+  height: 40px;
+  width: 40px;
+  background: rgb(255, 217, 0);
+  border: 0.25px solid rgb(255, 217, 0);
   position: absolute;
   left: 50%;
   top: 50%;
