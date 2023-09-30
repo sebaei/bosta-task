@@ -5,13 +5,7 @@ import { useTranslation } from "react-i18next";
 import { BostaAR, BostaEN, Magnify } from "../assets/SVGs.tsx";
 import axios from "axios";
 
-const locales = {
-  en: { title: "ENG" },
-  ar: { title: "AR" },
-};
-
 const Navbar = () => {
-  // const products = useSelector((state) => state.shipment?);
   const [track, setTrack] = useState("");
 
   const { t, i18n } = useTranslation();
@@ -70,7 +64,6 @@ const Navbar = () => {
           </div>
         </div>
         <h4>{t("navLast.second")}</h4>
-        {/* <div className="dropdown"> */}
         <h4
           className="switch-lang"
           onClick={
@@ -81,12 +74,7 @@ const Navbar = () => {
         >
           {i18n.language === "ar" ? "ENG" : "عربي"}
         </h4>
-        {/* <div className="dropdown-content">
-            <h4 onClick={() => i18n.changeLanguage("ar")}>AR</h4>
-            <h4 onClick={() => i18n.changeLanguage("en")}>ENG</h4>
-          </div> */}
       </div>
-      {/* </div> */}
     </div>
   );
 };

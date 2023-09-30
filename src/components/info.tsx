@@ -11,9 +11,6 @@ const Info = () => {
   const created = shipment?.TransitEvents?.filter(
     (event) => event?.state === "TICKET_CREATED"
   );
-  console.log("HIHI");
-
-  console.log(created);
 
   let createdTimestamp = created ? created[0]?.timestamp : null;
   console.log(createdTimestamp);
@@ -21,17 +18,10 @@ const Info = () => {
   let indexOfT = createdTimestamp?.indexOf("T");
   let createdDate = createdTimestamp?.substring(0, indexOfT);
   let createdTime = createdTimestamp?.substring(indexOfT + 1, indexOfT + 6);
-  // let [createdDate, createdTime] = createdTimestamp
-  //   ? createdTimestamp.split("T")
-  //   : null;
-  // createdTime = createdTime?.substring(0, 5);
 
   let received = shipment?.TransitEvents?.filter(
     (event) => event?.state === "PACKAGE_RECEIVED"
   );
-
-  console.log("HI22222");
-  console.log(received);
 
   let lastReceived = received ? received[received?.length - 1] : null;
   let updateReceivedTime = lastReceived?.timestamp;
@@ -44,9 +34,6 @@ const Info = () => {
     indexOfReceivedT + 1,
     indexOfReceivedT + 6
   );
-  // let [receivedDate, receivedTime] = updateReceivedTime?.split("T");
-  // receivedTime = receivedTime?.substring(0, 5);
-
   const outDelivery = shipment?.TransitEvents?.filter(
     (event) => event?.state === "OUT_FOR_DELIVERY"
   );
@@ -62,13 +49,9 @@ const Info = () => {
     indexOfReceivedT + 6
   );
 
-  // let [outDate, outTime] = updateOutTime?.split("T");
-  // outTime = outTime?.substring(0, 5);
-
   const delivered = shipment?.TransitEvents?.filter((event) =>
     event?.state.includes("DELIVERED")
   );
-  // const deliveredTimestamp = delivered[0]?.timestamp;
   let deliveredTimestamp = delivered ? delivered[0]?.timestamp : null;
 
   let indexOfDeliveredT = deliveredTimestamp?.indexOf("T");
@@ -77,9 +60,6 @@ const Info = () => {
     indexOfDeliveredT + 1,
     indexOfDeliveredT + 6
   );
-
-  // let [deliveredDate, deliveredTime] = deliveredTimestamp?.split("T");
-  // deliveredTime = deliveredTime?.substring(0, 5);
 
   var isReceived = received && received[0] ? true : false;
   var isOutDelivery = outDelivery && outDelivery[0] ? true : false;

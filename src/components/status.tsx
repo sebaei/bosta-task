@@ -1,14 +1,9 @@
 import React from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import StepProgressBar from "react-step-progress";
 import "react-step-progress/dist/index.css";
-import { setShipment } from "../redux/actions/index.ts";
-import { t } from "i18next";
 import { useTranslation } from "react-i18next";
 import { Delivered, OutDelivery, Received } from "../assets/SVGs.tsx";
-
-const baseURL = "https://tracking.bosta.co/shipments/track/7234258";
 
 const Status = () => {
   var shipment = useSelector((state) => state?.allShipments?.shipment);
@@ -20,26 +15,14 @@ const Status = () => {
   var received = shipment?.TransitEvents?.filter(
     (event) => event?.state === "PACKAGE_RECEIVED"
   );
+
   var outDelivery = shipment?.TransitEvents?.filter(
     (event) => event?.state === "OUT_FOR_DELIVERY"
   );
-  console.log(outDelivery);
 
   var delivered = shipment?.TransitEvents?.filter((event) =>
     event?.state.includes("DELIVERED")
   );
-
-  console.log(created);
-  console.log(received);
-
-  // const dispatch = useDispatch();
-  // const [shipment, setSHipmentData] = React.useState(null);
-  // React.useEffect(() => {
-  //   axios.get(baseURL).then((response) => {
-  //     dispatch(setShipment(response.data));
-  //     setSHipmentData(response.data);
-  //   });
-  // }, []);
   const { t, i18n } = useTranslation();
 
   var currentLanguage = i18n.language === "ar";
@@ -50,11 +33,9 @@ const Status = () => {
   const offset = date.getTimezoneOffset() * 60 * 1000;
   const timestampWithoutOffset = timestampWithOffset - offset;
   const dateWithoutOffset = new Date(timestampWithoutOffset);
-  //
   const deliveryDate = shipment?.PromisedDate || shipment?.CreateDate;
   const indexOfT = deliveryDate?.indexOf("T");
   const dateWithoutTime = dateString?.substring(0, indexOfT);
-  const dateobj = new Date(dateWithoutTime);
 
   const currentStateDelivered =
     shipment?.CurrentStatus?.state.includes("DELIVERED");
@@ -63,7 +44,6 @@ const Status = () => {
   const currentStatePending = !currentStateDelivered && !currentStateCancelled;
 
   var isCreated = created && created[0] ? true : false;
-
   var isReceived = received && received[0] ? true : false;
   var isOutDelivery = outDelivery && outDelivery[0] ? true : false;
   var isDelivered = delivered && delivered[0] ? true : false;
@@ -104,40 +84,6 @@ const Status = () => {
           <p>{dateWithoutTime}</p>
         </div>
       </div>
-      {/* Progress bar */}
-      {/* <div className={currentLanguage === "ar" ? "bar" : "bar en"}>
-        {shipment?.TrackingNumber ? (
-          <StepProgressBar
-            startingStep={delivered ? 3 : outDelivery ? 2 : received ? 1 : 0}
-            // onSubmit={onFormSubmit}
-            steps={[
-              {
-                label: t("progressBar.first"),
-                name: "step 1",
-                content: "step 1",
-              },
-              {
-                label: t("progressBar.second"),
-                name: "step 2",
-                content: "step 2",
-              },
-              {
-                label: t("progressBar.third"),
-                name: "step 3",
-                content: "step 3",
-              },
-              {
-                label: t("progressBar.fourth"),
-                name: "step 4",
-                content: "step 4",
-              },
-            ]}
-          />
-        ) : (
-          <div className="enter-text">Enter number to track shipment</div>
-        )}
-      </div> */}
-
       <section className="step-wizard">
         <ul className="step-wizard-list">
           <li

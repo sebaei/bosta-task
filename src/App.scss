@@ -16,33 +16,23 @@ body {
   padding: 8px 100px;
 }
 
-// section {
-//   text-align: right;
-// }
-
 .navbar {
-  // position: fixed;
   padding: 0px;
   display: flex;
   width: 100%;
-  // flex-direction: row-reverse;
   justify-content: space-around;
   border-bottom: 1px solid rgb(231, 231, 231);
 
   .nav-first {
-    /* margin-left: 20px; */
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    // width: 20%;
     svg {
-      // top: 100px;
     }
   }
   .nav-mid {
     display: flex;
-    // flex-direction: row-reverse;
     justify-content: space-evenly;
     width: 50%;
 
@@ -53,7 +43,6 @@ body {
 
   .nav-last {
     display: flex;
-    // flex-direction: row-reverse;
     width: 25%;
     justify-content: space-evenly;
     .switch-lang {
@@ -74,14 +63,7 @@ body {
 
     .dropdown {
       border-radius: 8px;
-      // float: left;
       overflow: hidden;
-      &:hover {
-        // border: 1px solid rgb(231, 231, 231);
-        // border: 0.5px solid rgb(231, 231, 231);
-
-        border-radius: 8px;
-      }
 
       > h4 {
         cursor: pointer;
@@ -91,59 +73,22 @@ body {
       }
     }
 
-    /* Dropdown button */
-    // .dropdown .dropbtn {
-    //   font-size: 16px;
-    //   border: none;
-    //   outline: none;
-    //   color: red;
-    //   padding: 14px 16px;
-    //   background-color: inherit;
-    //   font-family: inherit; /* Important for vertical align on mobile phones */
-    //   margin: 0; /* Important for vertical align on mobile phones */
-    // }
-
-    /* Dropdown content (hidden by default) */
     .dropdown-content {
       display: none;
       float: left;
       position: absolute;
       background-color: white;
       min-width: 180px;
-      // box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
       border: 1px solid rgb(231, 231, 231);
       padding: 10px 20px;
       z-index: 1;
 
-      // .search {
-      //   position: relative;
-
-      //   .search-input {
-      //     // padding-right: 30px;
-      //     // padding-left: 30px;
-      //   }
-
-      //   .icon {
-      //     position: absolute;
-      //     background-color: red;
-      //     border-radius: 4px;
-      //     // padding: 0px 10px;
-      //     // left: 10px;
-      //     svg {
-      //       margin-top: 5px;
-      //       // padding: 10px;
-      //     }
-      //   }
-      // }
       .search {
         position: relative;
         display: inline-block;
       }
 
       .search-input {
-        // text-align: center;
-        // padding-right: 30px;
-        // padding-left: 30px; /* Adjust the padding to create space for the icon */
       }
 
       .icon {
@@ -151,7 +96,7 @@ body {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        left: 0px; /* Adjust this value as needed to position the icon */
+        left: 0px;
         background-color: red;
         border-radius: 4px;
         padding: 0px 20px 0px 0px;
@@ -159,7 +104,6 @@ body {
         &.en {
           right: 0px;
           left: 80%;
-          // left: 100%;
         }
         svg {
           margin-left: 20px;
@@ -168,35 +112,22 @@ body {
       }
     }
 
-    /* Links inside the dropdown */
     .dropdown-content h4 {
       float: none;
       color: rgb(51, 51, 51);
       font-weight: 200;
-      // padding: 0px 16px;
       text-decoration: none;
       display: block;
-      // text-align: left;
     }
 
     .dropdown-content input {
-      // margin: 0px 10px 25px 10px;
       padding: 10px 30px;
       border: 1px solid rgb(231, 231, 231);
       border-radius: 4px;
     }
 
-    /* Add a grey background color to dropdown links on hover */
-    // .dropdown-content h4:hover {
-    //   background-color: red;
-    //   color: white;
-    //   // margin: 0px;
-    // }
-
-    /* Show the dropdown menu on hover */
     .dropdown:hover .dropdown-content {
       display: block;
-      // left: 0;
       border-radius: 6px;
     }
   }
@@ -204,28 +135,23 @@ body {
 
 .step-wizard {
   border: 1px solid rgb(231, 231, 231);
-  // padding: 10px 25px 50px 25px;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
-  // width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .step-wizard-list {
   background: #fff;
-  // box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
   color: #333;
   list-style-type: none;
   border-radius: 10px;
   display: flex;
-  // padding: 20px 10px;
   position: relative;
   z-index: 10;
 }
 
 .step-wizard-item {
-  // padding: 0 20px;
   flex-basis: 0;
   -webkit-box-flex: 1;
   -ms-flex-positive: 1;
@@ -389,23 +315,18 @@ body {
   display: none;
 }
 .current-item ~ .step-wizard-item .progress-count:after {
-  // height: 10px;
-  // width: 10px;
 }
 .current-item ~ .step-wizard-item .progress-label {
   opacity: 0.5;
 }
 .current-item .progress-count:after {
   background: #fff;
-  // border: 2px solid #21d4fd;
 }
 .current-item .progress-count {
-  // color: #21d4fd;
 }
 
 .status {
   display: flex;
-  // flex-direction: row-reverse;
   justify-content: space-around;
   border: 1px solid rgb(231, 231, 231);
   padding: 10px 20px;
@@ -469,10 +390,6 @@ body {
 
 .details-section {
   display: flex;
-  // flex-direction: row-reverse;
-  // justify-content: flex-end;
-  // width: 100%;
-  // padding: 10px 50px;
   justify-content: space-between;
   @media (max-width: 800px) {
     flex-direction: column;
@@ -480,41 +397,20 @@ body {
 }
 .details-table {
   width: 62%;
-  // float: right;
   display: flex;
   flex-direction: column;
 
   @media (max-width: 800px) {
     width: 100%;
   }
-
-  // table {
-  //   border: 1px solid rgb(231, 231, 231);
-  //   padding: 0px 20px;
-  //   border-radius: 10px;
-  //   border-spacing: 0px;
-  //   thead tr td {
-  //     border: 1px solid rgb(231, 231, 231);
-  //   }
-  //   tbody tr td {
-  //     border: 1px solid rgb(231, 231, 231);
-  //     // padding: 0px 50px;
-  //     // border-radius: 10px;
-  //   }
-  // }
   table {
-    // border-collapse: collapse;
     border-spacing: 0px;
     border: 1px solid rgb(231, 231, 231);
     border-radius: 10px;
-    // display: block;
     thead {
       background: rgba(231, 231, 231, 0.3);
     }
   }
-  // tr::first {
-  //   border: none;
-  // }
   th {
     border-top: 1px solid rgb(231, 231, 231);
     border-bottom: 1px solid rgb(231, 231, 231);
@@ -528,9 +424,6 @@ body {
     padding: 10px 20px;
   }
 }
-// h4 {
-//   float: right;
-// }
 .address-contact {
   display: flex;
   flex-direction: column;
@@ -538,7 +431,6 @@ body {
   @media (max-width: 800px) {
     width: 100%;
   }
-  // margin-right: 15px;
   .address {
     border: 1px solid rgb(231, 231, 231);
     border-radius: 10px;
@@ -552,7 +444,6 @@ body {
     border: 1px solid rgb(231, 231, 231);
     border-radius: 10px;
     padding: 10px 15px;
-    // flex-direction: row-reverse;
     .contact-img {
       margin-left: 15px;
       max-width: 120px;
